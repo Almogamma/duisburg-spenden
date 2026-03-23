@@ -270,19 +270,42 @@ h3 {
 
 /* Responsive for smaller screens */
 @media (max-width: 1024px) {
+  /* Expand the white container slightly for tablets */
+  .container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  /* Prevent QR codes from stacking by allowing their text to shrink */
   .images-container {
-    gap: 30px;
+    gap: 20px;
   }
+  
+  .qr-item h4 {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  /* Force the Arabic text to take full width and center itself */
   .middle-text {
-    max-width: 300px;
-    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 10px;
   }
+
   .middle-text h3 {
     font-size: 18px;
   }
+
+  .middle-text p {
+    font-size: 14px;
+  }
+
   .remaining-amounts {
     font-size: 16px;
   }
+
   .remaining-amounts .number {
     font-size: 20px;
   }
