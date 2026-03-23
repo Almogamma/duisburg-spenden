@@ -210,7 +210,7 @@ h3 {
 }
 
 .middle-text {
-  width: 100%; /
+  width: 100%; 
   display: flex;
   flex-direction: column;
   align-items: center;
