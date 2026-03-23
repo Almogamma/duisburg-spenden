@@ -1,34 +1,27 @@
-// Initialize variables to prevent reference errors
 let targetValue = 0;
 let currentValue = 0;
 
-// Changed output=csv to output=tsv to fix European comma issues
-const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_2HnnsUQRQThPMyRnGgiEf3hvzp6wMRZLUwAe2yOuhMuJTtR0Pjf0ajuXXvNI8mC1mjBPlU1flaPp/pub?gid=0&single=true&output=tsv';
+// 1. Add a cache-busting timestamp to the URL so data is always live
+const baseUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_2HnnsUQRQThPMyRnGgiEf3hvzp6wMRZLUwAe2yOuhMuJTtR0Pjf0ajuXXvNI8mC1mjBPlU1flaPp/pub?gid=0&single=true&output=tsv';
+const sheetUrl = baseUrl + '&t=' + new Date().getTime();
 
 async function start() {
   try {
     const response = await fetch(sheetUrl);
     const tsvText = await response.text();
-
-    // Split by new line
     const rows = tsvText.split('\n');
 
-    // Check if the sheet has at least 22 rows
     if (rows.length >= 22) {
-      // Split by TAB instead of comma
       const row22 = rows[21].split('\t');
-
-      // Helper function to safely read German formatted numbers
       const parseNum = (str) => {
         if (!str) return 0;
         const cleaned = str.replace(/"/g, '').replace(/\./g, '');
         return parseFloat(cleaned.replace(/[^0-9.-]/g, '')) || 0;
       };
 
-      const sheetTarget = parseNum(row22[2]); // Column C
-      const sheetCurrent = parseNum(row22[8]); // Column I
+      const sheetTarget = parseNum(row22[2]); 
+      const sheetCurrent = parseNum(row22[8]); 
 
-      // Only overwrite backups if valid numbers exist
       if (sheetTarget > 0) targetValue = sheetTarget;
       if (sheetCurrent >= 0) currentValue = sheetCurrent;
     }
@@ -36,7 +29,13 @@ async function start() {
     console.error("Error loading sheet data", error);
   }
 
-  // Proceed to update screen whether sheet succeeded or failed
+  // 2. Hide the spinner and show the text container once data is loaded
+  document.getElementById('loadingSpinner').classList.add('hidden');
+  
+  const dataContent = document.getElementById('dataContent');
+  dataContent.classList.remove('hidden');
+  dataContent.classList.add('fade-in'); // This triggers the new CSS animation
+
   updateDisplaysAndAnimate(targetValue, currentValue);
 }
 
