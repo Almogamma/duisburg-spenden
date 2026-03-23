@@ -234,30 +234,69 @@ h3 {
   .images-container {
     gap: 30px;
   }
-
   .middle-text {
     max-width: 300px;
     padding: 20px;
   }
-
   .middle-text h3 {
     font-size: 18px;
   }
-
-  .middle-text p {
-    font-size: 14px;
-  }
-
   .remaining-amounts {
     font-size: 16px;
   }
-
   .remaining-amounts .number {
     font-size: 20px;
   }
 }
 
 @media (max-width: 768px) {
+  /* Expand container to use more screen space and reduce padding */
+  .container {
+    width: 95%;
+    padding: 25px 15px;
+  }
+
+  /* Ensure the main logo scales down instead of overflowing */
+  .main_image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Adjust header sizes for mobile */
+  h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  /* Stack the progress text vertically and center it */
+  .progress-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+  }
+  
+  #amountText {
+    margin-right: 0 !important;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .remaining-amounts {
+    text-align: center;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .progress-text {
+    font-size: 24px;
+  }
+
+  /* Stack QR codes vertically */
   .images-container {
     flex-direction: column;
     gap: 30px;
@@ -266,48 +305,37 @@ h3 {
   .qr-item img {
     max-width: 180px;
   }
-
+  
   .middle-text {
     max-width: 100%;
     order: -1;
   }
-
-  .progress-info {
-    justify-content: center;
-  }
-
-  .remaining-amounts {
-    text-align: center;
-    font-size: 16px;
-  }
-
-  .progress-text {
-    font-size: 28px;
-  }
 }
 
 @media (max-width: 480px) {
+  /* Further adjustments for very small phones */
+  .container {
+    width: 98%;
+    padding: 20px 10px;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  
+  h3 {
+    font-size: 16px;
+  }
+
   .qr-item img {
     max-width: 150px;
   }
 
   .qr-item h4 {
-    font-size: 16px;
-  }
-
-  .middle-text p {
-    font-size: 13px;
-  }
-
-  .progress-text {
-    font-size: 24px;
-  }
-
-  .remaining-amounts {
     font-size: 14px;
   }
 
-  .remaining-amounts .number {
-    font-size: 18px;
+  .progress-text {
+    font-size: 20px;
   }
 }
